@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include "Othello.hpp"
+#include "Othello.cpp"
 #include <time.h>
 
 using namespace std;
