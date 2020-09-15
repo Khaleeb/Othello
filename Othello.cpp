@@ -56,11 +56,13 @@ void Othello::printmat(){
 	for (int r = 0; r < boardsize+1; r++){
 		for (int c = 0; c < boardsize+1; c++){
 			if (c == 0){
-				if (r != 0){
-					cout << c - 1 << " ";
+				if (r == 0){
+					cout << "  ";
 				}
-			}
-			if(r == 0){
+				if (r != 0){
+					cout << r - 1 << " ";
+				}
+			} else if(r == 0){
 				cout << c - 1 << " ";
 			} else {
 				cout << board[r-1][c-1] << " ";
