@@ -1,15 +1,15 @@
 
 Othello: main.o Othello.o Player.o
-	gcc main.o -o Othello
+	g++ main.o -o Othello
 
 main.o: main.cpp
-	gcc -c main.cpp
+	g++ -c main.cpp
 
 Othello.o: Othello.cpp Othello.hpp
-	gcc -c Othello.cpp
+	g++ -c Othello.cpp
 
 Player.o: Player.cpp Player.hpp
-	gcc -c Player.cpp
+	g++ -c Player.cpp
 
 clean:
 	rm *.o output
