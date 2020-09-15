@@ -5,12 +5,11 @@
  * CISC 260 - Dr. Yarrington
  */
 
-#include "Othello.hpp"
-#include "Player.hpp"
 #include <string>
-
 #include <iostream>
 #include <stdlib.h>
+#include "Othello.hpp"
+#include "Player.hpp"
 using namespace std;
 
 

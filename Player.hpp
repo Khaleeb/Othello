@@ -5,6 +5,10 @@
  * CISC 260 - Dr. Yarrington
  */
 
+#include <string>
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
 class Player {
 
 	std::string name;
@@ -12,5 +16,7 @@ class Player {
 
 public:
 	Player();
-	Player(std::string, char);
+	Player(std::string name, char c);
 };
+
+#endif

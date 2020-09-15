@@ -5,6 +5,7 @@
  * CISC 260 - Dr. Yarrington
  */
 
+#include <string>
 #include "Player.hpp"
 
 Player::Player() {

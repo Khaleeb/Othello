@@ -5,8 +5,13 @@
  * CISC 260 - Dr. Yarrington
  */
 
+#ifndef OTHELLO_HPP
+#define OTHELLO_HPP
+
+#include "Player.hpp"
+
 class Othello {
-	char[8][8] board;
+	char board [8][8];
 	int boardsize;
 	Player p1;
 	Player p2;
@@ -14,11 +19,13 @@ class Othello {
 
 public:
 	Othello();
-	Othello(string, char);
-	Othello(string, char, string, char);
+	Othello(std::string, char);
+	Othello(std::string, char, std::string, char);
 
 	void makemat();
 	void printmat();
 
 	void playGame();
 };
+
+#endif
