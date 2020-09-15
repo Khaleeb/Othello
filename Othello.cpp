@@ -14,26 +14,26 @@ using namespace std;
 
 
 Othello::Othello(){
-	numplayer = 0;
-	p1 = new Player();
-	p2 = new Player("computer2", "O");
+	numplayers = 0;
+	Player p1;
+	Player p2("computer2", 'O');
 
 }
 
 Othello::Othello(string st1, char c){
-	numplayer = 1;
-	p1 = new Player(st1, c);
-	if (c == "B"){
-		p2 = new Player("computer", "O");
+	numplayers = 1;
+	Player p1(st1, c);
+	if (c == 'B'){
+		Player p2("computer", 'O');
 	} else {
-		p2 = new Player();
+		Player p2;
 	}
 }
 
 Othello::Othello(string st1, char c, string st2, char c2){
-	numplayer = 2;
-	p1 = new Player(st1, c);
-	p2 = new Player(st2, c2);
+	numplayers = 2;
+	Player p1(st1, c);
+	Player p2(st2, c2);
 }
 
 void Othello::makemat(){
@@ -42,10 +42,10 @@ void Othello::makemat(){
 			board[r][c] = '_';
 		}
 	}
-	board[3][3] = "B";
-	board[4][4] = "B";
-	board[3][4] = "O";
-	board[4][3] = "O";
+	board[3][3] = 'B';
+	board[4][4] = 'B';
+	board[3][4] = 'O';
+	board[4][3] = 'O';
 }
 
 void Othello::printmat(){
@@ -75,7 +75,7 @@ void Othello::playGame(){
 	printmat();
 	bool play = true;
 	int fullsqrs = 0;
-	player p = p1;
+	Player p = p1;
 	bool whichp = true;
 	bool turn = true;
 
