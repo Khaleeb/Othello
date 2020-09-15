@@ -14,6 +14,6 @@ Player::Player() {
 }
 
 Player::Player(std::string name, char piece){
-	this.name = name;
-	this.piece = piece;
+	this->name = name;
+	this->piece = piece;
 }

@@ -12,4 +12,4 @@ Player.o: Player.cpp Player.hpp
 	g++ -c Player.cpp
 
 clean:
-	rm *.o output
+	rm *.o Othello
