@@ -5,7 +5,7 @@
  * CISC 260 - Dr. Yarrington
  */
 
-#include "Player.cpp"
+#include "Player.hpp"
 
 Player::Player() {
 	name = "computer";
