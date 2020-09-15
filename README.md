@@ -1,2 +1,2 @@
 # Othello
-C++ Othello
+### cisc260 
