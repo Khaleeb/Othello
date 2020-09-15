@@ -11,10 +11,9 @@
 
 class Player {
 
+public:
 	std::string name;
 	char piece;
-
-public:
 	Player();
 	Player(std::string name, char c);
 };
