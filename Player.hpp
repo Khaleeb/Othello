@@ -7,10 +7,10 @@
 
 class Player {
 
-	string Name;
+	std::string name;
 	char piece;
 
 public:
 	Player();
-	Player(string, char);
+	Player(std::string, char);
 };

@@ -12,7 +12,7 @@ Player::Player() {
 	piece = 'B';
 }
 
-Player::Player(string name, char piece){
+Player::Player(std::string name, char piece){
 	this.name = name;
 	this.piece = piece;
 }

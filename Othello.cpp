@@ -7,21 +7,22 @@
 
 #include "Othello.hpp"
 #include "Player.hpp"
+#include <string>
 
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
-boardsize = 8;
 
 Othello::Othello(){
-	numplayers = 0;
+	numplayer = 0;
 	p1 = new Player();
 	p2 = new Player("computer2", "O");
 
 }
 
 Othello::Othello(string st1, char c){
-	numplayers = 1;
+	numplayer = 1;
 	p1 = new Player(st1, c);
 	if (c == "B"){
 		p2 = new Player("computer", "O");
@@ -31,7 +32,7 @@ Othello::Othello(string st1, char c){
 }
 
 Othello::Othello(string st1, char c, string st2, char c2){
-	numplayers = 2;
+	numplayer = 2;
 	p1 = new Player(st1, c);
 	p2 = new Player(st2, c2);
 }
@@ -106,4 +107,3 @@ void Othello::playGame(){
 	}
 	ckwin();
 }
-/* *

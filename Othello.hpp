@@ -14,9 +14,11 @@ class Othello {
 
 public:
 	Othello();
-	Othello(string st1, char c);
-	Othello(string st1, char c, string st2, char c2);
+	Othello(string, char);
+	Othello(string, char, string, char);
 
 	void makemat();
 	void printmat();
+
+	void playGame();
 };
