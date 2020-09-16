@@ -72,7 +72,118 @@ void Othello::printmat(){
 	}
 }
 
+void Othello::placepiece(Player curPlayer, char curColor){
+	int x, y;
+	bool valid = false;
+	while (!valid){
+		cout << "Enter the x coordinate on the board: ";
+		cin >> x;
+		cout << "Enter the y coordinate on the board: ";
+		cin >> y;
+		if (x >= 0 && x < boardsize && y >= 0 && y < boardsize && board[y][x] == '_'){
+			valid = true;
+		} else {
+			cout << "Invalid coordinates. Try again." << endl;
+		}
+	}
+	board[y][x] = curColor;
+	if (!countandflippieces(x, y, curPlayer)){
+		cout << "Player forfeits turn" << endl;
+		board[y][x] = '_';
+	}
+}
 
+int Othello::countandflippieces(int c, int r, Player curPlayer){
+	int cT, rT, tF;          // colTemp, rowTemp, totalFlipped
+	char opp;
+	if (curPlayer.piece == 'B'){
+		opp = 'O';
+	} else {
+		opp = 'B';
+	}
+	tF = 0;
+
+	// Left
+	if (c != 0 && board[r][c-1] == opp){
+		cT = c - 1;
+		while (cT >= 0){
+			if (board[r][cT] == curPlayer.piece){
+				for(int i = cT; i < c; i++){
+					board[r][i] = curPlayer.piece;
+					tF++;
+				}
+				break;
+			}
+			if (board[r][cT] == '_') {
+				break;
+			}
+			if (board[r][cT] == opp){
+				cT -= 1;
+			}
+		}
+	}
+
+	// Right
+	if (c != (boardsize-1) && board[r][c+1] == opp){
+		cT = c + 1;
+		while (cT < boardsize){
+			if (board[r][cT] == curPlayer.piece){
+				for(int i = cT; i > c; i--){
+					board[r][i] = curPlayer.piece;
+					tF++;
+				}
+				break;
+			}
+			if (board[r][cT] == '_') {
+				break;
+			}
+			if (board[r][cT] == opp){
+				cT += 1;
+			}
+		}
+	}
+
+	// Up
+	if (r != 0 && board[r-1][c] == opp){
+		rT = r - 1;
+		while (rT >= 0){
+			if (board[rT][c] == curPlayer.piece){
+				for(int i = rT; i < r; i++){
+					board[i][c] = curPlayer.piece;
+					tF++;
+				}
+				break;
+			}
+			if (board[rT][c] == '_') {
+				break;
+			}
+			if (board[rT][c] == opp){
+				rT -= 1;
+			}
+		}
+	}
+
+	// Down
+	if (c != (boardsize-1) && board[r+1][c] == opp){
+		rT = r + 1;
+		while (rT < boardsize){
+			if (board[rT][c] == curPlayer.piece){
+				for(int i = rT; i > r; i--){
+					board[i][c] = curPlayer.piece;
+					tF++;
+				}
+				break;
+			}
+			if (board[rT][c] == '_') {
+				break;
+			}
+			if (board[rT][c] == opp){
+				rT += 1;
+			}
+		}
+	}
+	return tF;
+}
 
 
 //playGame Method:
