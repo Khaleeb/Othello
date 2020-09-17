@@ -26,6 +26,7 @@ public:
 	void printmat();
 	void placepiece(Player, char);
 	int countandflippieces(int, int, Player);
+	void ckwin();
 
 	void playGame();
 };

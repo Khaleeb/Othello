@@ -17,27 +17,29 @@ using namespace std;
 Othello::Othello(){
 	boardsize = 8;
 	numplayers = 0;
-	Player p1;
-	Player p2("computer2", 'O');
+	p2.name = "computer2";
+	p2.piece = 'O';
 
 }
 
 Othello::Othello(string st1, char c){
 	boardsize = 8;
 	numplayers = 1;
-	Player p1(st1, c);
+	p1.name = st1;
+	p1.piece = c;
 	if (c == 'B'){
-		Player p2("computer", 'O');
-	} else {
-		Player p2;
+		p2.name = "computer";
+		p2.piece = 'O';
 	}
 }
 
 Othello::Othello(string st1, char c, string st2, char c2){
 	boardsize = 8;
 	numplayers = 2;
-	Player p1(st1, c);
-	Player p2(st2, c2);
+	p1.name = st1;
+	p1.piece = c;
+	p2.name = st2;
+	p2.piece = c2;
 }
 
 void Othello::makemat(){
@@ -185,12 +187,32 @@ int Othello::countandflippieces(int c, int r, Player curPlayer){
 	return tF;
 }
 
+void Othello::ckwin(){
+	int p1Points = 0;
+	int p2Points = 0;
+	for (int r = 0; r < boardsize; r++){
+		for (int c = 0; c < boardsize; c++){
+			if (board[r][c] == p1.piece){
+				p1Points++;
+			} else if (board[r][c] == p2.piece){
+				p2Points++;
+			}
+		}
+	}
+	if (p1Points > p2Points){
+		cout << p1.name << " won with: " << p1Points << " versus " << p2Points << endl;
+	} else if (p2Points > p1Points){
+		cout << p2.name << " won with: " << p2Points << " versus " << p1Points << endl;
+	} else {
+		cout << "Tied game: " << p1Points << " versus " << p2Points << endl;
+	}
+}
+
 
 //playGame Method:
 void Othello::playGame(){
 	makemat();
 	printmat();
-	/*
 	bool play = true;
 	int fullsqrs = 0;
 	Player p = p1;
@@ -205,10 +227,10 @@ void Othello::playGame(){
 	while ((play) && (fullsqrs < 64)){
 		cout << endl << p.name <<" ("<<p.piece<<") choose your square: "<<endl;
 		if ((numplayers == 2) || ((numplayers == 1) && turn)){
-			placepiece(p);
+			placepiece(p, p.piece);
 		}
 		else if ((numplayers == 0) || ((numplayers == 1) && (turn == false))){
-			compplacepiece(p);
+			//compplacepiece(p);
 		}
 		turn = !turn;
 		printmat();
@@ -222,6 +244,5 @@ void Othello::playGame(){
 		}
 		fullsqrs+=1;
 	}
-	ckwin();
-	*/
+	//ckwin();
 }
