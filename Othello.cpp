@@ -89,13 +89,13 @@ void Othello::placepiece(Player curPlayer, char curColor){
 		}
 	}
 	board[y][x] = curColor;
-	if (!countandflippieces(x, y, curPlayer)){
+	if (!countandflippieces(x, y, curPlayer, true)){
 		cout << "Player forfeits turn" << endl;
 		board[y][x] = '_';
 	}
 }
 
-int Othello::countandflippieces(int c, int r, Player curPlayer){
+int Othello::countandflippieces(int c, int r, Player curPlayer, bool flip){
 	int cT, rT, tF;          // colTemp, rowTemp, totalFlipped
 	char opp;
 	if (curPlayer.piece == 'B'){
@@ -111,7 +111,9 @@ int Othello::countandflippieces(int c, int r, Player curPlayer){
 		while (cT >= 0){
 			if (board[r][cT] == curPlayer.piece){
 				for(int i = cT; i < c; i++){
-					board[r][i] = curPlayer.piece;
+					if (flip){
+						board[r][i] = curPlayer.piece;
+					}
 					tF++;
 				}
 				break;
@@ -131,7 +133,9 @@ int Othello::countandflippieces(int c, int r, Player curPlayer){
 		while (cT < boardsize){
 			if (board[r][cT] == curPlayer.piece){
 				for(int i = cT; i > c; i--){
-					board[r][i] = curPlayer.piece;
+					if (flip){
+						board[r][i] = curPlayer.piece;
+					}
 					tF++;
 				}
 				break;
@@ -151,7 +155,9 @@ int Othello::countandflippieces(int c, int r, Player curPlayer){
 		while (rT >= 0){
 			if (board[rT][c] == curPlayer.piece){
 				for(int i = rT; i < r; i++){
-					board[i][c] = curPlayer.piece;
+					if (flip){
+						board[i][c] = curPlayer.piece;
+					}
 					tF++;
 				}
 				break;
@@ -171,7 +177,9 @@ int Othello::countandflippieces(int c, int r, Player curPlayer){
 		while (rT < boardsize){
 			if (board[rT][c] == curPlayer.piece){
 				for(int i = rT; i > r; i--){
-					board[i][c] = curPlayer.piece;
+					if (flip){
+						board[i][c] = curPlayer.piece;
+					}
 					tF++;
 				}
 				break;
@@ -181,6 +189,107 @@ int Othello::countandflippieces(int c, int r, Player curPlayer){
 			}
 			if (board[rT][c] == opp){
 				rT += 1;
+			}
+		}
+	}
+
+	// UpLeft
+	if (r != 0 && c!= 0 && board[r-1][c-1] == opp){
+		rT = r - 1;
+		cT = c - 1;
+		while (rT >= 0 && cT >= 0){
+			if (board[rT][cT] == curPlayer.piece){
+				int j = cT;
+				for(int i = rT; i < r && j < c; i++, j++){
+					if (flip){
+						board[i][j] = curPlayer.piece;
+					}
+					tF++;
+				}
+				break;
+			}
+			if (board[rT][cT] == '_') {
+				break;
+			}
+			if (board[rT][cT] == opp){
+				rT -= 1;
+				cT -= 1;
+			}
+		}
+	}
+
+	//UpRight
+	if (r != 0 && c!= (boardsize-1) && board[r-1][c+1] == opp){
+		rT = r - 1;
+		cT = c + 1;
+		while (rT >= 0 && cT < boardsize){
+			if (board[rT][cT] == curPlayer.piece){
+				int j = cT;
+				for(int i = rT; i < r && j > c; i++, j--){
+					if (flip){
+						board[i][j] = curPlayer.piece;
+					}
+					tF++;
+				}
+				break;
+			}
+			if (board[rT][cT] == '_') {
+				break;
+			}
+			if (board[rT][cT] == opp){
+				rT -= 1;
+				cT += 1;
+			}
+		}
+	}
+
+
+	//DownLeft
+	if (r != (boardsize-1) && c!= 0 && board[r-1][c-1] == opp){
+		rT = r + 1;
+		cT = c - 1;
+		while (rT < boardsize && cT >= 0){
+			if (board[rT][cT] == curPlayer.piece){
+				int j = cT;
+				for(int i = rT; i > r && j < c; i--, j++){
+					if (flip){
+						board[i][j] = curPlayer.piece;
+					}
+					tF++;
+				}
+				break;
+			}
+			if (board[rT][cT] == '_') {
+				break;
+			}
+			if (board[rT][cT] == opp){
+				rT += 1;
+				cT -= 1;
+			}
+		}
+	}
+
+	//DownRight
+	if (r != (boardsize-1) && c!= (boardsize-1) && board[r-1][c-1] == opp){
+		rT = r + 1;
+		cT = c + 1;
+		while (rT < boardsize && cT < boardsize){
+			if (board[rT][cT] == curPlayer.piece){
+				int j = cT;
+				for(int i = rT; i > r && j > c; i--, j--){
+					if (flip){
+						board[i][j] = curPlayer.piece;
+					}
+					tF++;
+				}
+				break;
+			}
+			if (board[rT][cT] == '_') {
+				break;
+			}
+			if (board[rT][cT] == opp){
+				rT += 1;
+				cT += 1;
 			}
 		}
 	}
