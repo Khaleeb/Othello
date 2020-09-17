@@ -318,27 +318,29 @@ void Othello::ckwin(){
 }
 
 void Othello::compplacepiece(Player p){
-	int arr[2];
-	arr[2] = 0;
+	int rH, cH;
+	int highest = 0;
 	for(int r = 0; r < boardsize; r++){
 		for (int c = 0; c < boardsize; c++){
-			if(countandflippieces(c, r, p, false) > arr[2]){
-				arr[0] = c;
-				arr[1] = r;
-				arr[2] = countandflippieces(c, r, p, false);
-			} else if (countandflippieces(c, r, p, false) != 0 && countandflippieces(c, r, p, false) == arr[2]){
+			if(board[r][c] == '_' && countandflippieces(c, r, p, false) > highest){
+				cH = c;
+				rH = r;
+				highest = countandflippieces(c, r, p, false);
+			} else if (board[r][c] == '_' && countandflippieces(c, r, p, false) != 0 && countandflippieces(c, r, p, false) == highest){
 				if ((rand() % 10) > 5){
-					arr[0] = c;
-					arr[1] = r;
-					arr[2] = countandflippieces(c, r, p, false);
+					cH = c;
+					rH = r;
+					highest = countandflippieces(c, r, p, false);
 				}
 			}
 		}
 	}
-	if(arr[2] == 0){
+	if(highest == 0){
 		cout << "no valid placement";
 	} else {
-		countandflippieces(arr[0], arr[1], p, true);
+		cout << "Coords: " << rH << " " << cH << " val: " << highest << endl;
+		countandflippieces(cH, rH, p, true);
+		board[rH][cH] = p.piece;
 	}
 }
 
@@ -364,7 +366,7 @@ void Othello::playGame(){
 			placepiece(p, p.piece);
 		}
 		else if ((numplayers == 0) || ((numplayers == 1) && (turn == false))){
-			//compplacepiece(p);
+			compplacepiece(p);
 		}
 		turn = !turn;
 		printmat();
@@ -378,5 +380,5 @@ void Othello::playGame(){
 		}
 		fullsqrs+=1;
 	}
-	//ckwin();
+	ckwin();
 }
