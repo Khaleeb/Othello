@@ -317,6 +317,31 @@ void Othello::ckwin(){
 	}
 }
 
+void Othello::compplacepiece(Player p){
+	int arr[2];
+	arr[2] = 0;
+	for(int r = 0; r < boardsize; r++){
+		for (int c = 0; c < boardsize; c++){
+			if(countandflippieces(c, r, p, false) > arr[2]){
+				arr[0] = c;
+				arr[1] = r;
+				arr[2] = countandflippieces(c, r, p, false);
+			} else if (countandflippieces(c, r, p, false) != 0 && countandflippieces(c, r, p, false) == arr[2]){
+				if ((rand() % 10) > 5){
+					arr[0] = c;
+					arr[1] = r;
+					arr[2] = countandflippieces(c, r, p, false);
+				}
+			}
+		}
+	}
+	if(arr[2] == 0){
+		cout << "no valid placement";
+	} else {
+		countandflippieces(arr[0], arr[1], p, true);
+	}
+}
+
 
 //playGame Method:
 void Othello::playGame(){
