@@ -30,6 +30,9 @@ Othello::Othello(string st1, char c){
 	if (c == 'B'){
 		p2.name = "computer";
 		p2.piece = 'O';
+	} else {
+		p2.name = "computer";
+		p2.piece = 'B';
 	}
 }
 
@@ -89,9 +92,11 @@ void Othello::placepiece(Player curPlayer, char curColor){
 		}
 	}
 	board[y][x] = curColor;
-	if (!countandflippieces(x, y, curPlayer, true)){
+	if (!countandflippieces(x, y, curPlayer, false)){
 		cout << "Player forfeits turn" << endl;
 		board[y][x] = '_';
+	} else {
+		countandflippieces(x, y, curPlayer, true);
 	}
 }
 
@@ -245,7 +250,7 @@ int Othello::countandflippieces(int c, int r, Player curPlayer, bool flip){
 
 
 	//DownLeft
-	if (r != (boardsize-1) && c!= 0 && board[r-1][c-1] == opp){
+	if (r != (boardsize-1) && c!= 0 && board[r+1][c-1] == opp){
 		rT = r + 1;
 		cT = c - 1;
 		while (rT < boardsize && cT >= 0){
@@ -270,7 +275,7 @@ int Othello::countandflippieces(int c, int r, Player curPlayer, bool flip){
 	}
 
 	//DownRight
-	if (r != (boardsize-1) && c!= (boardsize-1) && board[r-1][c-1] == opp){
+	if (r != (boardsize-1) && c!= (boardsize-1) && board[r-1][c+1] == opp){
 		rT = r + 1;
 		cT = c + 1;
 		while (rT < boardsize && cT < boardsize){
@@ -336,7 +341,9 @@ void Othello::compplacepiece(Player p){
 		}
 	}
 	if(highest == 0){
-		cout << "no valid placement";
+		cout << "no valid placement" << endl;
+		cout << "GAME OVER" << endl;
+		ckwin();
 	} else {
 		cout << "Coords: " << rH << " " << cH << " val: " << highest << endl;
 		countandflippieces(cH, rH, p, true);
